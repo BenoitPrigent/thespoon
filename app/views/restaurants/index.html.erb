@@ -7,8 +7,8 @@
 </form>
 
 <ul>
-  <% @restaurants.each do |id, restaurant| %>
-    <li> <%= link_to restaurant[:name], restaurant_path(id)   %></li>
+  <% @restaurants.each do |restaurant| %>
+    <li> <%= restaurant.name %> | <%= restaurant.stars %> <%= link_to "Delete", restaurant_path(restaurant.id), method: :delete %></li>
   <% end %>
 </ul>
 

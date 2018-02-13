@@ -1,26 +1,55 @@
 class RestaurantsController < ApplicationController
 
+  # Read All
 
- RESTAURANTS = {
-    1 => { name: "Dishoom", address: "Shoreditch, London", category: "indian" },
-    2 => { name: "Sushi Samba", address: "City, London", category: "japanese" }
-  }
+  before_action :set_restaurant, only: [ :show, :edit, :update, :destroy]
 
   def index
-    if params[:food_type].blank?
-      @restaurants= RESTAURANTS
-    else
-      @restaurants = RESTAURANTS.select do |key, value|
-       value[:category] == params[:food_type]
-      end
-    end
-  end
-
-  def create
-
+    @restaurants =  Restaurant.all
   end
 
   def show
-    @restaurant = RESTAURANTS[params[:id].to_i]
   end
+
+  # Create
+
+  def new
+    @restaurant = Restaurant.new
+  end
+
+  def create
+    @restaurant = Restaurant.new(restaurant_params)
+    @restaurant.save
+    redirect_to restaurants_path
+  end
+
+
+  # Update
+
+  def edit
+  end
+
+  def update
+    @restaurant.update(restaurant_params)
+    restaurant_params = params[:restaurants]
+    redirect_to restaurants_path
+  end
+
+  # Delete
+
+  def destroy
+    @restaurant.destroy
+    redirect_to restaurants_path
+  end
+
+  private
+
+  def set_restaurant
+    @restaurant = Restaurant.find(params[:id])
+  end
+
+  def restaurant_params
+    params.require(:restaurant).permit(:name, :address, :stars)
+  end
+
 end

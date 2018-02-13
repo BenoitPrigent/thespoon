@@ -5,11 +5,26 @@ Rails.application.routes.draw do
 
   root to: 'pages#home'
 
-  get 'restaurants', to: 'restaurants#index'
+  # READ #
+  resources :restaurants
+  #   #Read All
+  # get 'restaurants', to: 'restaurants#index'
+  #   #Read One
+  # get 'restaurants/:id', to: 'restaurants#show', as: "restaurant"
 
-  post 'restaurants', to: 'restaurants#create'
+  # # Create #
+  #   # get info from the user
+  # get 'restaurants/new', to: 'restaurants#new'
+  #   # store data
+  # post 'restaurants', to: 'restaurants#create'
 
-  get 'restaurants/:id', to: 'restaurants#show', as: "restaurant"
 
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  # # Update
+  # get 'restaurants/:id/edit', to: 'restaurants#edit'
+  # patch 'restaurants', to: 'restaurants#update'
+
+  # # delete
+  # delete 'restaurants/:id', to: 'restaurants#destroy'
+
+  # # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
